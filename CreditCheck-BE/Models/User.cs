@@ -15,7 +15,6 @@ namespace CreditCheck_BE.Models
         public byte[] PasswordSalt { get; set; }
         public int Pin { get; set; }
         public string CompanyName { get; set; }
-
         public virtual ICollection<ScoreQuery> ScoreQueries { get; set; }
     }
 }
