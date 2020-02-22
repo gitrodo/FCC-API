@@ -9,5 +9,6 @@ namespace CreditCheck_BE.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<ScoreQuery> ScoreQueries { get; set; }
+        public DbSet<Address> Addresses { get; set; }
     }
 }
