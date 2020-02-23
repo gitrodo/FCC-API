@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CreditCheck_BE.Data;
 using CreditCheck_BE.Dtos;
-using CreditCheck_BE.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CreditCheck_BE.Controllers
 {
@@ -17,15 +11,15 @@ namespace CreditCheck_BE.Controllers
     [ApiController]
     public class LocationsController : ControllerBase
     {
-        private readonly DataContext _dataContext;
+        private readonly IAddress _addressRepository;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="addressRepository"></param>
-        public LocationsController(DataContext dataContext)
+        public LocationsController(IAddress addressRepository)
         {
-            _dataContext = dataContext;
+            _addressRepository = addressRepository;
         }
 
         /// <summary>
@@ -39,11 +33,7 @@ namespace CreditCheck_BE.Controllers
             if (!ModelState.IsValid)
                 return BadRequest("Please, verify your information and try again");
 
-            // var returnedInformation = await _addressRepository.SearchAddress(addressDTO);
-            var returnedInformation = await _dataContext.Addresses.Where(
-                p => p.ZipCode.Contains(addressDTO.ZipCode) ||
-                (p.HouseNumber == addressDTO.HouseNumber && p.StreetName == addressDTO.StreetName))
-                .ToListAsync();
+            var returnedInformation = await _addressRepository.SearchAddress(addressDTO);
 
             if (returnedInformation != null)
                 return Ok(returnedInformation);
