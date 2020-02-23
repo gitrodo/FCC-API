@@ -28,6 +28,7 @@ namespace CreditCheck_BE
             services.AddControllers();
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IAddress, AddressRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

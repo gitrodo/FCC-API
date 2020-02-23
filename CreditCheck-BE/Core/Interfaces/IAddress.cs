@@ -1,13 +1,12 @@
 ﻿using CreditCheck_BE.Dtos;
-using System;
+using CreditCheck_BE.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CreditCheck_BE.Data
 {
-    public interface IAddress<T>
+    public interface IAddress
     {
-        Task<List<T>> SearchAddress(AddressDTO addressDTO);
+        Task<IEnumerable<Address>> SearchAddress(AddressDTO addressDTO);
     }
 }
